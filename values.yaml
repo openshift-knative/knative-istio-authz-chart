@@ -1,0 +1,19 @@
+# Default values for knative-service-mesh-onboarding.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# name is the tenant name.
+name: ""
+
+# namespaces is the set of namespaces a tenant owns.
+namespaces: [ ]
+
+# Cluster information
+cluster:
+  # Kubernetes cluster domain
+  domain: "cluster.local"
+
+# Reply-related configurations
+reply:
+  # Exclude reply-related authorization policies
+  exclude: false

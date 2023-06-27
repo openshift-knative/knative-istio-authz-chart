@@ -1,0 +1,27 @@
+---
+# Allow Knative Channel for Apache Kafka to receive requests from {{ join "," $.Values.namespaces }}.
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: allow-{{ $.Values.name }}-kafka-channel
+  namespace: knative-eventing
+spec:
+  action: ALLOW
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: "kafka-channel-receiver"
+  rules:
+    - from:
+        - source:
+            namespaces:
+            {{- range $v := $.Values.namespaces }}
+            - "{{ $v }}"
+            {{- end }}
+      to:
+        - operation:
+            hosts:
+            {{- range $v := $.Values.namespaces }}
+            - "*.{{ $v }}.svc.{{ $.Values.cluster.domain }}"
+            {{- end }}
+            methods: [ "POST" ]
+---

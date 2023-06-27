@@ -1,0 +1,28 @@
+{{ if eq $.Values.reply.exclude false }}
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: allow-{{ $.Values.name }}-kafka-broker-reply
+  namespace: knative-eventing
+spec:
+  action: ALLOW
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: "kafka-broker-receiver"
+  rules:
+    - from:
+        - source:
+            namespaces:
+              - "knative-eventing"
+            principals:
+              - "cluster.local/ns/knative-eventing/sa/kafka-broker-dispatcher"
+      to:
+        - operation:
+            paths:
+            {{- range $v := $.Values.namespaces }}
+            - "/{{ $v }}/*"
+            {{- end }}
+            methods: [ "POST" ]
+---
+{{ end }}

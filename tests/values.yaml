@@ -1,0 +1,5 @@
+name: "tenant-1"
+
+namespaces:
+  - ns1
+  - ns2
