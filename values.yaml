@@ -13,7 +13,7 @@ cluster:
   # Kubernetes cluster domain
   domain: "cluster.local"
 
-# Reply-related configurations
+# Eventing-related configurations
 eventing:
   receivers:
     - name: "imc-dispatcher"
