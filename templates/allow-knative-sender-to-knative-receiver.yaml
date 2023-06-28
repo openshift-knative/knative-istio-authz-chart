@@ -1,22 +1,22 @@
 {{- range $component := $.Values.eventing.receivers }}
 {{- range $sa := $.Values.eventing.sendersServiceAccounts }}
 ---
-# Allow {{ $component }} to receive requests from KafkaSources in {{ join "," $.Values.namespaces }}.
+# Allow {{ $component.name }} to receive requests from {{ $sa.name }} in knative-eventing.
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
-  name: allow-{{ $.Values.name }}-{{ $sa }}-to-{{ $component }}
+  name: allow-{{ $.Values.name }}-{{ $sa.shortName }}-to-{{ $component.shortName }}
   namespace: knative-eventing
 spec:
   action: ALLOW
   selector:
     matchLabels:
-      app.kubernetes.io/component: "{{ $component }}"
+      app.kubernetes.io/component: "{{ $component.name }}"
   rules:
     - from:
         - source:
             namespaces: [ "knative-eventing" ]
-            principals: [ "cluster.local/ns/knative-eventing/sa/{{ $sa }}" ]
+            principals: [ "cluster.local/ns/knative-eventing/sa/{{ $sa.name }}" ]
       to:
         - operation:
             hosts:
@@ -27,7 +27,7 @@ spec:
     - from:
         - source:
             namespaces: [ "knative-eventing" ]
-            principals: [ "cluster.local/ns/knative-eventing/sa/{{ $sa }}" ]
+            principals: [ "cluster.local/ns/knative-eventing/sa/{{ $sa.name }}" ]
       to:
         - operation:
             paths:

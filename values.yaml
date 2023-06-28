@@ -16,18 +16,29 @@ cluster:
 # Reply-related configurations
 eventing:
   receivers:
-    - "imc-dispatcher"
-    - "kafka-broker-receiver"
-    - "kafka-channel-receiver"
-    - "kafka-sink-receiver"
-    - "broker-ingress"
+    - name: "imc-dispatcher"
+      shortName: "imc"
+    - name: "kafka-broker-receiver"
+      shortName: "ekb"
+    - name: "kafka-channel-receiver"
+      shortName: "ekc"
+    - name: "kafka-sink-receiver"
+      shortName: "eks"
+    - name: "broker-ingress"
+      shortName: "broker-ingress"
   sendersServiceAccounts:
-    - "pingsource-mt-adapter"
-    - "imc-dispatcher"
-    - "mt-broker-filter"
-    - "knative-kafka-source-data-plane"
-    - "knative-kafka-broker-data-plane"
-    - "knative-kafka-channel-data-plane"
+    - name: "pingsource-mt-adapter"
+      shortName: "pingsource"
+    - name: "imc-dispatcher"
+      shortName: "imc"
+    - name: "mt-broker-filter"
+      shortName: "broker-filter"
+    - name: "knative-kafka-source-data-plane"
+      shortName: "eks"
+    - name: "knative-kafka-broker-data-plane"
+      shortName: "ekb"
+    - name: "knative-kafka-channel-data-plane"
+      shortName: "ekc"
   reply:
     # Exclude reply-related authorization policies
     exclude: false
