@@ -1,4 +1,4 @@
-{{ if eq $.Values.reply.exclude false }}
+{{ if eq $.Values.eventing.reply.exclude false }}
 ---
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy

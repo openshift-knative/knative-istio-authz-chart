@@ -1,0 +1,27 @@
+{{- range $component := $.Values.eventing.receivers }}
+---
+# Allow {{ $component }} to receive requests from KafkaSources in {{ join "," $.Values.namespaces }}.
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: allow-{{ $.Values.name }}-kafka-source-to-{{ $component }}
+  namespace: knative-eventing
+spec:
+  action: ALLOW
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: "{{ $component }}"
+  rules:
+    - from:
+        - source:
+            namespaces: [ "knative-eventing" ]
+            principals: [ "cluster.local/ns/knative-eventing/sa/knative-kafka-source-data-plane" ]
+      to:
+        - operation:
+            hosts:
+            {{- range $v := $.Values.namespaces }}
+            - "*.{{ $v }}.svc.{{ $.Values.cluster.domain }}"
+            {{- end }}
+            methods: [ "POST" ]
+{{ end }}
+---
