@@ -21,6 +21,13 @@ eventing:
     - "kafka-channel-receiver"
     - "kafka-sink-receiver"
     - "broker-ingress"
+  sendersServiceAccounts:
+    - "pingsource-mt-adapter"
+    - "imc-dispatcher"
+    - "mt-broker-filter"
+    - "knative-kafka-source-data-plane"
+    - "knative-kafka-broker-data-plane"
+    - "knative-kafka-channel-data-plane"
   reply:
     # Exclude reply-related authorization policies
     exclude: false
