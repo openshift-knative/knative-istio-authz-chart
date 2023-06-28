@@ -10,7 +10,7 @@
 
 1. Deny all traffic by default
    ```shell
-   kubectl apply -f setup/allow-traffic-to-activator.yaml
+   kubectl apply -f setup/deny-all-by-default.yaml
    ```
 
 2. Allow Knative Serving components to send requests to the Activator

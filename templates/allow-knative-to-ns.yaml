@@ -4,7 +4,7 @@
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
-  name: allow-traffic-from-knative
+  name: allow-from-knative
   namespace: {{ $ns }}
 spec:
   action: ALLOW
