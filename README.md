@@ -23,6 +23,12 @@
    ```shell
    kubectl apply -f setup/allow-probe-kafka-controller.yaml
    ```
+   
+4. Allow Brokers with class `MTChannelBasedBroker` to communicate with the underlying channels:
+
+   ```shell
+   kubectl apply -f setup/allow-mt-channel-based-broker-to-channels.yaml
+   ```
 
 ### Onboarding a set of namespaces
 
