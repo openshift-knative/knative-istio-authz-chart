@@ -14,6 +14,10 @@ cluster:
   domain: "cluster.local"
 
 # Eventing-related configurations
+serving:
+  receivers:
+    - name: "activator"
+      shortName: "activator"
 eventing:
   receivers:
     - name: "imc-dispatcher"
