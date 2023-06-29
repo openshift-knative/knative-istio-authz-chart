@@ -26,5 +26,8 @@ spec:
             - "/{{ $v }}/*"
             {{- end }}
             methods: [ "POST" ]
+      when:
+        key: request.headers[Kn-Namespace]
+        values: [ "{{ $v }}" ]
 ---
 {{ end }}

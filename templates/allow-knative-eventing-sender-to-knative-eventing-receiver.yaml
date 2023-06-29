@@ -24,6 +24,9 @@ spec:
             - "*.{{ $v }}.svc.{{ $.Values.cluster.domain }}"
             {{- end }}
             methods: [ "POST" ]
+      when:
+        key: request.headers[Kn-Namespace]
+        values: [ "{{ $v }}" ]
     - from:
         - source:
             namespaces: [ "knative-eventing" ]
@@ -35,6 +38,9 @@ spec:
             - "/{{ $v }}/*"
             {{- end }}
             methods: [ "POST" ]
+      when:
+        key: request.headers[Kn-Namespace]
+        values: [ "{{ $v }}" ]
 ---
 {{ end }}
 {{ end }}
