@@ -15,8 +15,17 @@ spec:
               {{- range $v := $.Values.namespaces }}
               - "{{ $v }}"
               {{- end }}
-              - "knative-eventing"
               - "knative-serving"
               - "istio-system"
+    - from:
+        - source:
+            namespaces:
+              - "knative-eventing"
+      when:
+        key: request.headers[Kn-Namespace]
+        values:
+          {{- range $v := $.Values.namespaces }}
+          - "{{ $v }}"
+          {{- end }}
 ---
 {{- end }}

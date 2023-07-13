@@ -43,6 +43,3 @@ eventing:
       shortName: "ekb"
     - name: "knative-kafka-channel-data-plane"
       shortName: "ekc"
-  reply:
-    # Exclude reply-related authorization policies
-    exclude: false

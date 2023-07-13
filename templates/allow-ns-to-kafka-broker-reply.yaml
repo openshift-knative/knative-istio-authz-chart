@@ -1,4 +1,3 @@
-{{ if eq $.Values.eventing.reply.exclude false }}
 ---
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
@@ -26,6 +25,8 @@ spec:
             methods: [ "POST" ]
       when:
         key: request.headers[Kn-Namespace]
-        values: [ "{{ $v }}" ]
+        values:
+          {{- range $v := $.Values.namespaces }}
+          - "{{ $v }}"
+          {{- end }}
 ---
-{{ end }}
