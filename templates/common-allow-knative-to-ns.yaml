@@ -4,11 +4,12 @@
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
-  name: allow-from-knative
+  name: allow-from-knative-and-istio
   namespace: {{ $ns }}
 spec:
   action: ALLOW
   rules:
+{{- if $.Values.enableServing }}
     - from:
         - source:
             namespaces:
@@ -16,7 +17,9 @@ spec:
               - "{{ $v }}"
               {{- end }}
               - "knative-serving"
-              - "istio-system"
+              - {{ $.Values.istioNamespace | quote }}
+{{ end }}
+{{- if $.Values.enableEventing }}
     - from:
         - source:
             namespaces:
@@ -27,5 +30,6 @@ spec:
           {{- range $v := $.Values.namespaces }}
           - "{{ $v }}"
           {{- end }}
+{{ end }}
 ---
 {{- end }}

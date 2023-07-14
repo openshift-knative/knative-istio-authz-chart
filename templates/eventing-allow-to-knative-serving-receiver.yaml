@@ -1,18 +1,19 @@
-{{- range $component := $.Values.eventing.receivers }}
+{{- if .Values.enableEventing }}
+{{- range $component := $.Values.serving.receivers }}
 ---
 # Allow {{ $component.name }} to receive requests from workloads and resources in {{ join "," $.Values.namespaces }}.
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
   name: allow-{{ $.Values.name }}-to-{{ $component.shortName }}
-  namespace: knative-eventing
+  namespace: knative-serving
 spec:
   action: ALLOW
   selector:
     matchLabels:
       app.kubernetes.io/component: "{{ $component.name }}"
   rules:
-    # Allow to receive requests from event sources in {{ join "," $.Values.namespaces }}
+    # Allow to receive requests for Knative services in {{ join "," $.Values.namespaces }}
     - from:
         - source:
             namespaces:
@@ -21,17 +22,11 @@ spec:
             {{- end }}
       to:
         - operation:
-            paths:
-            {{- range $v := $.Values.namespaces }}
-            - "/{{ $v }}/*"
-            {{- end }}
-            methods: [ "POST" ]
-        - operation:
             hosts:
             {{- range $v := $.Values.namespaces }}
             - "*.{{ $v }}.svc.{{ $.Values.cluster.domain }}"
             {{- end }}
-            methods: [ "POST" ]
+    # Allow to receive requests from eventing sources, subscriptions and triggers in {{ join "," $.Values.namespaces }}.
     - from:
         - source:
             namespaces: [ "knative-eventing" ]
@@ -44,26 +39,6 @@ spec:
             hosts:
             {{- range $v := $.Values.namespaces }}
             - "*.{{ $v }}.svc.{{ $.Values.cluster.domain }}"
-            {{- end }}
-            methods: [ "POST" ]
-      when:
-        - key: request.headers[Kn-Namespace]
-          values:
-          {{- range $v := $.Values.namespaces }}
-          - "{{ $v }}"
-          {{- end }}
-    - from:
-        - source:
-            namespaces: [ "knative-eventing" ]
-            principals:
-            {{- range $sa := $.Values.eventing.sendersServiceAccounts }}
-            - "cluster.local/ns/knative-eventing/sa/{{ $sa.name }}"
-            {{ end }}
-      to:
-        - operation:
-            paths:
-            {{- range $v := $.Values.namespaces }}
-            - "/{{ $v }}/*"
             {{- end }}
             methods: [ "POST" ]
       when:
@@ -73,4 +48,5 @@ spec:
           - "{{ $v }}"
           {{- end }}
 ---
+{{ end }}
 {{ end }}

@@ -10,6 +10,7 @@
 
 1. Deny all traffic by default
    ```shell
+   // TODO RETO: FIX THOSE
    kubectl apply -f setup/deny-all-by-default.yaml
    ```
 
