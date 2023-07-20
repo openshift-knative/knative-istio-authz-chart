@@ -22,8 +22,8 @@ spec:
             namespaces:
               - "knative-eventing"
       when:
-        key: request.headers[Kn-Namespace]
-        values:
+        - key: request.headers[Kn-Namespace]
+          values:
           {{- range $v := $.Values.namespaces }}
           - "{{ $v }}"
           {{- end }}

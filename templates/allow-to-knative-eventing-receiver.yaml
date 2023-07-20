@@ -47,8 +47,8 @@ spec:
             {{- end }}
             methods: [ "POST" ]
       when:
-        key: request.headers[Kn-Namespace]
-        values:
+        - key: request.headers[Kn-Namespace]
+          values:
           {{- range $v := $.Values.namespaces }}
           - "{{ $v }}"
           {{- end }}
@@ -67,8 +67,8 @@ spec:
             {{- end }}
             methods: [ "POST" ]
       when:
-        key: request.headers[Kn-Namespace]
-        values:
+        - key: request.headers[Kn-Namespace]
+          values:
           {{- range $v := $.Values.namespaces }}
           - "{{ $v }}"
           {{- end }}
