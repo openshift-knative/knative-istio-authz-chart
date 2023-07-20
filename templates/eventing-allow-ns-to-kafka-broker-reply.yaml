@@ -1,4 +1,4 @@
-{{- if .Values.enableEventing }}
+{{- if .Values.eventing.enabled }}
 ---
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy

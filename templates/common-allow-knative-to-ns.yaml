@@ -1,6 +1,6 @@
 {{- range $ns := $.Values.namespaces }}
 ---
-# Allow namespace {{ $ns }} to receive requests from Knative system components.
+# Allow namespace {{ $ns }} to receive requests from Knative system components, from istio-system and from all namespaces of the tenant.
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
@@ -9,7 +9,7 @@ metadata:
 spec:
   action: ALLOW
   rules:
-{{- if $.Values.enableServing }}
+{{- if $.Values.serving.enabled }}
     - from:
         - source:
             namespaces:
@@ -19,7 +19,7 @@ spec:
               - "knative-serving"
               - {{ $.Values.istioNamespace | quote }}
 {{ end }}
-{{- if $.Values.enableEventing }}
+{{- if $.Values.eventing.enabled }}
     - from:
         - source:
             namespaces:

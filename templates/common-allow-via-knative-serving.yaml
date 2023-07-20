@@ -1,4 +1,3 @@
-{{- if .Values.enableEventing }}
 {{- range $component := $.Values.serving.receivers }}
 ---
 # Allow {{ $component.name }} to receive requests from workloads and resources in {{ join "," $.Values.namespaces }}.
@@ -13,6 +12,7 @@ spec:
     matchLabels:
       app.kubernetes.io/component: "{{ $component.name }}"
   rules:
+{{- if $.Values.serving.enabled }}
     # Allow to receive requests for Knative services in {{ join "," $.Values.namespaces }}
     - from:
         - source:
@@ -26,6 +26,8 @@ spec:
             {{- range $v := $.Values.namespaces }}
             - "*.{{ $v }}.svc.{{ $.Values.cluster.domain }}"
             {{- end }}
+{{ end }}
+{{- if $.Values.eventing.enabled }}
     # Allow to receive requests from eventing sources, subscriptions and triggers in {{ join "," $.Values.namespaces }}.
     - from:
         - source:
@@ -47,6 +49,6 @@ spec:
           {{- range $v := $.Values.namespaces }}
           - "{{ $v }}"
           {{- end }}
----
 {{ end }}
+---
 {{ end }}

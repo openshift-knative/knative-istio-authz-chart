@@ -1,4 +1,4 @@
-{{- if .Values.enableEventing }}
+{{- if .Values.eventing.enabled }}
 {{- range $component := $.Values.eventing.receivers }}
 ---
 # Allow {{ $component.name }} to receive requests from workloads and resources in {{ join "," $.Values.namespaces }}.

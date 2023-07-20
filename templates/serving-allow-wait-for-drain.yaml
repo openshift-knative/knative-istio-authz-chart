@@ -1,7 +1,7 @@
-{{- if .Values.enableServing }}
+{{- if .Values.serving.enabled }}
 {{- range $ns := $.Values.namespaces }}
 ---
-# Allow kubernetes to call the PreStopHook to wait for draining on port 8022 in ns {{ $ns }}
+# Allow kubernetes to call the PreStopHook to wait for draining on port 8022 in {{ $ns }}
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:

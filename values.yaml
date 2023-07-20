@@ -11,10 +11,6 @@ namespaces: [ ]
 # namespace where istiod is installed
 istioNamespace: "istio-system"
 
-# configures if serving and eventing related resources should be generated or not
-enableServing: true
-enableEventing: true
-
 # Cluster information
 cluster:
   # Kubernetes cluster domain
@@ -22,10 +18,12 @@ cluster:
 
 # Eventing-related configurations
 serving:
+  enabled: true
   receivers:
     - name: "activator"
       shortName: "activator"
 eventing:
+  enabled: true
   receivers:
     - name: "imc-dispatcher"
       shortName: "imc"
