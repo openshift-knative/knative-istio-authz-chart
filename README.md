@@ -42,11 +42,11 @@ Imaging we want to onboard a new project `order-service` to Knative composed of 
 
 2. Install the Helm chart
    ```shell
-   helm install oci://quay.io/pierdipi/knative-istio-authz-onboarding --version 0.1.0 --set "name=order-service" --set "namespaces={ns1, ns2}"
+   helm install oci://quay.io/openshift-knative/knative-istio-authz-onboarding --version 1.31.0 --set "name=order-service" --set "namespaces={ns1, ns2}"
    ```
    or, view the resources you would need to onboard the project:
    ```shell
-   helm template oci://quay.io/pierdipi/knative-istio-authz-onboarding --version 0.1.0 --set "name=order-service" --set "namespaces={ns1, ns2}"
+   helm template oci://quay.io/openshift-knative/knative-istio-authz-onboarding --version 1.31.0 --set "name=order-service" --set "namespaces={ns1, ns2}"
    ```
 
 ## Development
