@@ -15,7 +15,7 @@ spec:
             namespaces:
               - "knative-eventing"
             principals:
-              - "cluster.local/ns/knative-eventing/sa/knative-kafka-channel-data-plane"
+              - "cluster.local/ns/knative-eventing/sa/knative-kafka-broker-data-plane"
       to:
         - operation:
             paths:
