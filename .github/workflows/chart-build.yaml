@@ -23,6 +23,6 @@ jobs:
           quay_password: ${{ secrets.QUAY_PASSWORD }}
         run: docker login -u="${quay_user}" -p="${quay_password}" quay.io
 
-      - name: Login to quay.io
+      - name: Push to quay.io
         if: github.event_name == 'push'
         run: ls *.tgz | xargs -I{} helm push {} oci://quay.io/openshift-knative
