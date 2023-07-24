@@ -4,32 +4,8 @@
 
 ### Prerequisite
 
-- [Follow setup OpenShift Serverless with Service Mesh](https://openshift-knative.github.io/docs/docs/latest/serverless-eventing/service-mesh/eventing-service-mesh-setup.html)
-
-### Setup Authorization policies for Knative system components
-
-1. Deny all traffic by default
-   ```shell
-   kubectl apply -f setup/common-deny-all-by-default.yaml
-   ```
-
-2. Allow Knative Serving system components to send requests to the Activator and Autoscaler
-   ```shell
-   kubectl apply -f setup/serving-allow-traffic-to-activator.yaml
-   kubectl apply -f setup/serving-allow-traffic-to-autoscaler.yaml
-   ```
-
-3. Allow Knative Kafka controller to probe Knative Kafka data plane for resource readiness
-
-   ```shell
-   kubectl apply -f setup/eventing-allow-probe-kafka-controller.yaml
-   ```
-   
-4. Allow Brokers with class `MTChannelBasedBroker` to communicate with the underlying channels:
-
-   ```shell
-   kubectl apply -f setup/eventing-allow-mt-channel-based-broker-to-channels.yaml
-   ```
+- [Follow setup OpenShift Serverless with Service Mesh](https://openshift-knative.github.io/docs/docs/latest/serverless-common/service-mesh/common-service-mesh-setup.html).
+- [Follow use Service Mesh to isolate network traffic with OpenShift Serverless](https://openshift-knative.github.io/docs/docs/latest/serverless-common/service-mesh/common-service-mesh-network-isolation.html).
 
 ### Onboarding a set of namespaces
 
