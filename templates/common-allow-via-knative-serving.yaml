@@ -24,6 +24,8 @@ spec:
         - operation:
             hosts:
             {{- range $v := $.Values.namespaces }}
+            - "*.{{ $v }}"
+            - "*.{{ $v }}.svc"
             - "*.{{ $v }}.svc.{{ $.Values.cluster.domain }}"
             {{- end }}
 {{ end }}
@@ -40,6 +42,8 @@ spec:
         - operation:
             hosts:
             {{- range $v := $.Values.namespaces }}
+            - "*.{{ $v }}"
+            - "*.{{ $v }}.svc"
             - "*.{{ $v }}.svc.{{ $.Values.cluster.domain }}"
             {{- end }}
             methods: [ "POST" ]
