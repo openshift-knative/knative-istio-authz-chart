@@ -46,7 +46,6 @@ spec:
             - "*.{{ $v }}.svc"
             - "*.{{ $v }}.svc.{{ $.Values.cluster.domain }}"
             {{- end }}
-            methods: [ "POST" ]
       when:
         - key: request.headers[Kn-Namespace]
           values:

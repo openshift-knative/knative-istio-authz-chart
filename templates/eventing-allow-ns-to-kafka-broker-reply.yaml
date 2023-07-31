@@ -23,7 +23,6 @@ spec:
             {{- range $v := $.Values.namespaces }}
             - "/{{ $v }}/*"
             {{- end }}
-            methods: [ "POST" ]
       when:
         - key: request.headers[Kn-Namespace]
           values:
