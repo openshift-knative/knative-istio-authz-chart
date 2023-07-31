@@ -8,6 +8,9 @@ name: ""
 # namespaces is the set of namespaces a tenant owns.
 namespaces: [ ]
 
+# namespace where istiod is installed
+istioNamespace: "istio-system"
+
 # Cluster information
 cluster:
   # Kubernetes cluster domain
@@ -15,10 +18,12 @@ cluster:
 
 # Eventing-related configurations
 serving:
+  enabled: true
   receivers:
     - name: "activator"
       shortName: "activator"
 eventing:
+  enabled: true
   receivers:
     - name: "imc-dispatcher"
       shortName: "imc"

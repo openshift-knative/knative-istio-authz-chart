@@ -1,3 +1,4 @@
+{{- if .Values.eventing.enabled }}
 ---
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
@@ -32,3 +33,4 @@ spec:
           - "{{ $v }}"
           {{- end }}
 ---
+{{ end }}
