@@ -26,13 +26,13 @@ spec:
             {{- range $v := $.Values.namespaces }}
             - "/{{ $v }}/*"
             {{- end }}
-            methods: [ "POST" ]
         - operation:
             hosts:
             {{- range $v := $.Values.namespaces }}
+            - "*.{{ $v }}"
+            - "*.{{ $v }}.svc"
             - "*.{{ $v }}.svc.{{ $.Values.cluster.domain }}"
             {{- end }}
-            methods: [ "POST" ]
     - from:
         - source:
             namespaces: [ "knative-eventing" ]
@@ -44,9 +44,10 @@ spec:
         - operation:
             hosts:
             {{- range $v := $.Values.namespaces }}
+            - "*.{{ $v }}"
+            - "*.{{ $v }}.svc"
             - "*.{{ $v }}.svc.{{ $.Values.cluster.domain }}"
             {{- end }}
-            methods: [ "POST" ]
       when:
         - key: request.headers[Kn-Namespace]
           values:
@@ -66,7 +67,6 @@ spec:
             {{- range $v := $.Values.namespaces }}
             - "/{{ $v }}/*"
             {{- end }}
-            methods: [ "POST" ]
       when:
         - key: request.headers[Kn-Namespace]
           values:
