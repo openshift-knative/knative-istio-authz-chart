@@ -1,5 +1,5 @@
 apiVersion: v2
-name: knative-istio-authz-onboarding
+name: knative-istio-authz
 description: Helm chart to onboard a set of authorization-based isolated namespaces to Knative when using Istio.
 
 # A chart can be either an 'application' or a 'library' chart.
