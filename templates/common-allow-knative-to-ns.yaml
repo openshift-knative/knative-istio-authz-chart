@@ -17,6 +17,7 @@ spec:
               - "{{ $v }}"
               {{- end }}
               - "knative-serving"
+              - "knative-serving-ingress"
               - {{ $.Values.istioNamespace | quote }}
 {{ end }}
 {{- if $.Values.eventing.enabled }}
