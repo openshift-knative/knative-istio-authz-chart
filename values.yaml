@@ -35,6 +35,8 @@ eventing:
       shortName: "eks"
     - name: "broker-ingress"
       shortName: "broker-ingress"
+    - name: "job-sink"
+      shortName: "job-sink"
   sendersServiceAccounts:
     - name: "pingsource-mt-adapter"
       shortName: "pingsource"
